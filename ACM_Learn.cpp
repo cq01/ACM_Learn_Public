@@ -3,11 +3,9 @@
 using namespace std;
 int main()
 {
-	long int n, m, a, s;
-	cin >> n;
-	for (long int i = 0; i < n; i++)
+	int  m, a, s;
+	while (cin >> m)
 	{
-		cin >> m;
 		s = 0;
 		for (long int j = 0; j < m; j++)
 		{
