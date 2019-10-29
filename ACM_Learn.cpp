@@ -3,16 +3,13 @@
 using namespace std;
 int main()
 {
-	int n, a, s;
-	while (true)
+	long int n, m, a, s;
+	cin >> n;
+	for (long int i = 0; i < n; i++)
 	{
-		cin >> n;
-		if (n == 0)
-		{
-			break;
-		}
+		cin >> m;
 		s = 0;
-		for (int i = 0; i < n; i++)
+		for (long int j = 0; j < m; j++)
 		{
 			cin >> a;
 			s += a;
