@@ -3,15 +3,9 @@
 using namespace std;
 int main()
 {
-	int  m, a, s;
-	while (cin >> m)
+	int a, b;
+	while (cin >> a >> b)
 	{
-		s = 0;
-		for (long int j = 0; j < m; j++)
-		{
-			cin >> a;
-			s += a;
-		}
-		cout << s << endl;
+		cout << a + b << endl << endl;
 	}
 }
