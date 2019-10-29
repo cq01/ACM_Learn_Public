@@ -3,9 +3,19 @@
 using namespace std;
 int main()
 {
-	int a, b;
-	while (cin >> a >> b)
+	long int n, m, a, s;
+	while (cin >> n)
 	{
-		cout << a + b << endl << endl;
+		for (long int i = 0; i < n; i++)
+		{
+			cin >> m;
+			s = 0;
+			for (long int j = 0; j < m; j++)
+			{
+				cin >> a;
+				s += a;
+			}
+			cout << s << endl << endl;
+		}
 	}
 }
