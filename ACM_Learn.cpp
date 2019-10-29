@@ -3,14 +3,20 @@
 using namespace std;
 int main()
 {
-	int a, b;
+	int n, a, s;
 	while (true)
 	{
-		cin >> a >> b;
-		if (a == 0 && b == 0)
+		cin >> n;
+		if (n == 0)
 		{
 			break;
 		}
-		cout << a + b << endl;
+		s = 0;
+		for (int i = 0; i < n; i++)
+		{
+			cin >> a;
+			s += a;
+		}
+		cout << s << endl;
 	}
 }
