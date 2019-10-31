@@ -2,17 +2,19 @@
 #include <iostream>
 #include<cstring>
 using namespace std;
+char str[1001];
 int main()
 {
 	int n;
-	char cstr[101];
-	while (cin.getline(cstr,101))
+	cin >> n;
+	cin.get();
+	for (int i = 0; i < n; ++i)
 	{
-		n = strlen(cstr);
-		for (int i = n-1; i >=0; --i)
-		{
-			cout << cstr[i];
-		}
-		cout << endl;
+		cin.getline(str, 1000);
+		cout << str << endl << endl;
+	}
+	while (cin >> str)
+	{
+		cout << str << endl << endl;
 	}
 }
