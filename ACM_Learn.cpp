@@ -1,56 +1,96 @@
-﻿//from https://blog.csdn.net/metaphysis/article/details/6431937
-//Licensed under CC 4.0 BY-SA(http://creativecommons.org/licenses/by-sa/4.0/)
-#include <iostream>
+﻿//Copyright by cq01, 2019 Licensed under the MIT license : http://www.opensource.org/licenses/mit-license.php
 
+#include <iostream>
+#include<vector>
 #define max(a,b) (a>b?a:b)
 #define min(a,b) (a<b?a:b)
-#define MAXSIZE 100000
 using namespace std;
 
-int cache[MAXSIZE] = { 0 };
-long int times(long int n);
+typedef std::vector<char> charVector;
+typedef std::vector<charVector> charVector2D;
+charVector2D Map;
+void Minesweeper(const int& n, const int& m);
+void fillMap(const int& n, const int& m);
+int MineNumber(const int& n, const int& m, const int& i, const int& j);
+inline int GetMine(const int& n, const int& m, const int& i, const int& j);
 int main()
 {
-	int i, j;
-	int res = 0;
-	int step;
-	while (cin >> i >> j)
+	int n, m;
+	int i = 0;
+	while (cin >> n >> m)
 	{
-		int start = min(i, j);
-		int end = max(i, j);
-		for (long int k = start; k <= end; ++k)
+		if (n == 0 || m == 0)
 		{
-			if ((step = times(k)) > res)
+			break;
+		}
+		if (i)
+		{
+			cout << endl;
+		}
+		++i;
+		cout << "Field #" << i << ':' << endl;
+		Minesweeper(n, m);
+	}
+
+	return 0;
+}
+void fillMap(const int& n, const int& m)
+{
+	char c;
+	cin.get();
+	Map.resize(n);
+	for (int i = 0; i < n; ++i)
+	{
+		Map[i].resize(m);
+		for (int j = 0; j < m; ++j)
+		{
+			c = cin.get();
+			if (c == '.')
 			{
-				res = step;
+				Map[i][j] = 0;
+			}
+			else
+			{
+				Map[i][j] = 1;
 			}
 		}
-		cout << i << ' ' << j << ' ' << res << endl;
-		res = 0;
+		cin.get();
 	}
 }
-
-long int times(long int n)
+int MineNumber(const int& n, const int& m, const int& i, const int& j)
 {
-	if (n == 1)
+	int sum = 0;
+	for (int s = i - 1; s < i + 2; ++s)
 	{
-		return 1;
-	}
-	if (n & 1)//n%2
-	{
-		n += (n << 1) + 1;//3n+1
-	}
-	else
-	{
-		n >>= 1;//n/2
-	}
-	if (n < MAXSIZE)//search cache
-	{
-		if (!cache[n])
+		for (int t = j - 1; t < j + 2; ++t)
 		{
-			cache[n] = times(n);
+			sum += GetMine(n, m, s, t);
 		}
-		return cache[n] + 1;
 	}
-	return times(n) + 1;
+	return sum;
+}
+inline int GetMine(const int& n, const int& m, const int& i, const int& j)
+{
+	if (i < 0 || i >= n || j < 0 || j >= m)
+	{
+		return 0;
+	}
+	return Map[i][j];
+}
+void Minesweeper(const int& n, const int& m)
+{
+	fillMap(n, m);
+	for (int i = 0; i < n; ++i)
+	{
+		for (int j = 0; j < m; ++j)
+		{
+			if (Map[i][j])
+			{
+				cout << '*';
+				continue;
+			}
+			cout << MineNumber(n, m, i, j);
+		}
+		cout << endl;
+	}
 }
